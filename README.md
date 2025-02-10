@@ -25,8 +25,8 @@ However, I have not experienced any significant discrepancy between the two appr
 
 ## How to install libwannier90
 libwannier90 needs to be installed first before one can call pyWannier90 from the code of choice (PySCF or MCU).
-- Replace /wannier90-xxx/src/wannier_lib.F90 with /pyWannier90/src/wannier_lib.F90
-- Go to /wannier90-xxx, modify make.inc with your favorite compiler and important adding this line to it:
+- Replace /wannier90-xxx/src/wannier_lib.F90 with /pyWannier90/src/wannier_lib.F90 (Note by Andreas: This is already completed on my forks)
+- Go to /wannier90-xxx, modify make.inc with your favorite compiler and important adding this line to it (Note by Andreas: I already added the line on my forks. You need to install the appropriate compilers yourself, e.g. LAPACK, BLAS and Fortran):
 	```
 	FCOPTS = -O3 -fPIC -g
 	```
@@ -38,11 +38,11 @@ libwannier90 needs to be installed first before one can call pyWannier90 from th
 	```
 	make
 	```
-- Modify the path of libwannier90 in pyWannier90.py (in /pyscf/pbc/tools or in /mcu/wannier90)
+- Modify the path of libwannier90 in pyWannier90.py (in /pyscf/pbc/tools or in /mcu/wannier90) (Note by Andreas: Do this by adding /wannier90-xxx and /pyWannier90/src to $PATH or $PYTHONPATH)
 	
-- Test libwannier90 library:
+- Test libwannier90 and pywannier90 libraries:
 	```
-	python -c "import libwannier90"		#Should return nothing if the compilation was successful
+	python -c "import pywannier90"		#Should return nothing if the compilation was successful
 	```
 	
 ## How to cite?
