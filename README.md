@@ -24,7 +24,7 @@ One should note that the MLWFs constructed by pyWannier90 may be not identical t
 However, I have not experienced any significant discrepancy between the two approaches. 
 
 ## How to install libwannier90
-libwannier90 needs to be installed first before one can call pyWannier90 from the code of choice (PySCF or MCU).
+libwannier90 needs to be installed first before one can call pyWannier90 from the code of choice (PySCF or MCU). Installation instructions for WSL by Andreas:
 - Replace /wannier90-xxx/src/wannier_lib.F90 with /pyWannier90/src/wannier_lib.F90 (Note by Andreas: This is already completed on my forks)
 - Go to /wannier90-xxx, modify make.inc with your favorite compiler and important adding this line to it (Note by Andreas: I already added the line on my forks. You need to install the appropriate compilers yourself, e.g. LAPACK, BLAS and Fortran):
 	```
@@ -38,7 +38,22 @@ libwannier90 needs to be installed first before one can call pyWannier90 from th
 	```
 	make
 	```
-- Modify the path of libwannier90 in pyWannier90.py (in /pyscf/pbc/tools or in /mcu/wannier90) (Note by Andreas: Do this by adding /wannier90-xxx and /pyWannier90/src to $PATH or $PYTHONPATH)
+- Modify the path of libwannier90 in pyWannier90.py (in /pyscf/pbc/tools or in /mcu/wannier90) Note by Andreas: Do this by adding /wannier90-xxx and /pyWannier90/src to $PYTHONPATH. In total, add the following to .bashrc:
+
+```
+# Wannier
+export PYTHONPATH=$PYTHONPATH:/home/tsevasa/pyWannier90/src
+export PYTHONPATH=$PYTHONPATH:/home/tsevasa/libwannier90/wannier90-3.1.0
+
+# Force load LAPACK library:
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/liblapack.so
+
+# Symbolic links to compilers
+ln -sf /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /home/tsevasa/conda/lib/libstdc++.so.6
+ln -sf /usr/lib/x86_64-linux-gnu/liblapack.so /home/tsevasa/conda/lib/liblapack.so
+```
+
+This includes a workaround for missing feature flags in compilers.
 	
 - Test libwannier90 and pywannier90 libraries:
 	```
